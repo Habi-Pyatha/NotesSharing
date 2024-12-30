@@ -21,4 +21,6 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   validates :phone, presence: true, format: { with: /\A\d{10}\z/, message: "Must be 10 digits" }
+
+  has_many :notes
 end
