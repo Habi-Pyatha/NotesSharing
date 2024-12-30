@@ -23,4 +23,5 @@ class User < ApplicationRecord
   validates :phone, presence: true, format: { with: /\A\d{10}\z/, message: "Must be 10 digits" }
 
   has_many :notes
+  has_one_attached :user_image
 end

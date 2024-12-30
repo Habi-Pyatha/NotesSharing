@@ -7,7 +7,7 @@
 <h2 class="my-3 font-bold text-blue-400 text-lg">Log In</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class=" max-w-[30em]">
+  <div class="">
     <%= f.label :email ,class:" py-2 "%><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"w-full py-2 px-4 " %>
   </div>
