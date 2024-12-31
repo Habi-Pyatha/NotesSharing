@@ -1,18 +1,27 @@
-<nav class="relative select-none bg-grey lg:flex lg:items-stretch w-full bg-gray-700">
+<nav class="relative select-none bg-grey lg:flex lg:items-center w-full bg-gray-700">
   <div class="flex flex-no-shrink items-stretch h-12">
-    <%= link_to "Notes",root_path,class:"flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-lg text-white no-underline flex items-center hover:text-green-600 hover:text-xl"%>
-    <button class="block lg:hidden cursor-pointer ml-auto relative w-12 h-12 p-4">
-      <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-      <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
-    </button>
+    <%= link_to "ColabNotes",root_path,class:"flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-lg text-white no-underline flex items-center hover:text-green-600"%>
+    
   </div>
   <div class="lg:flex lg:items-stretch lg:flex-no-shrink lg:flex-grow">
     <div class="lg:flex lg:items-stretch lg:justify-end ml-auto">
     <%unless user_signed_in?%>
         <%= link_to "Sign In", new_user_session_path, class: "flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-green-500" %>
         <%= link_to "Sign Up", new_user_registration_path	, class: "flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-green-500" %>
+        
       <%else%>
             <%= link_to "Sign Out",destroy_user_session_path, data:{turbo_method: :delete} ,class:"flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-red-500"%>
+            <span class="w-[60px] h-[60px] flex justify-center p-2 rounded overflow-hidden">
+            <%if current_user.user_image.attached?%>
+              <%=link_to edit_user_registration_path (current_user) ,class:"flex items-center" do%>
+                <%=image_tag url_for(current_user.user_image),alt:"Profile",class:"rounded-full h-[40px] h-[40px]" %>
+              <%end%>
+            <%else%>
+               <%=link_to edit_user_registration_path(current_user) ,class:"flex items-center p-3 " do%>
+                <span class="rounded-full bg-black p-2 w-[50px] h-[50px] text-white flex justify-center items-center"><%=current_user.username[0].upcase%></span>
+                <%end%>
+            <%end%>
+          </span>
         <%end%>
       
     </div>

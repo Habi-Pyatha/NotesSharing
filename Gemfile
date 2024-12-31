@@ -61,3 +61,4 @@ gem "devise"
 
 gem "tailwindcss-rails", "~> 3.1"
 gem "image_processing"
+gem "simple_form"
