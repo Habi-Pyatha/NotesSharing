@@ -24,4 +24,19 @@ class User < ApplicationRecord
 
   has_many :notes
   has_one_attached :user_image
+  validate :validate_user_image
+
+
+  private
+  def validate_user_image
+    return unless user_image.attached?
+
+    unless user_image.content_type.in?(%w[image/jpg image/png image/jpeg])
+      errors.add(:user_image, " must be a PNG,JPG, or JPEG file")
+    end
+
+    if user_image.byte_size > 5.megabytes
+      errors.add(:user_image, "is too large (must be less then 5 MB)")
+    end
+  end
 end
