@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_action :authenticate_user!
   def index
     @notes = Note.all
-    @notes= @notes.sample(@notes.length)
+    # @notes= @notes.sample(@notes.length)
   end
 
   def new
@@ -12,8 +12,12 @@ class NotesController < ApplicationController
   def create
     @note= Note.new(note_params)
     if @note.save
-      redirect_to root_path, notice: "Note was added successfully."
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: "Note was added successfully." }
+        format.turbo_stream
+      end
     else
+      flash[:alert]="Failed to Add Note."
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,13 +32,22 @@ class NotesController < ApplicationController
     if @note.update(note_params)
       redirect_to root_path, notice: "Note was updated successfully."
     else
+      flash[:alert]="Failed to Update Note."
       render :edit, status: :unprocessable_entity
     end
   end
   def destroy
     # @note=Note.find(params[:id])
     if @note.destroy
+      flash[:notice]="Note was deleted successfully."
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.turbo_stream
+      end
+    else
+      flash[:alert]="Failed to Delete Note."
       redirect_to root_path
+
     end
   end
 

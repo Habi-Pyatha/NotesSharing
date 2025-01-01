@@ -10,5 +10,7 @@
                     
     </div>
     <h2 class="text-center text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
-    <p class="text-justify p-3"><%=@note.content%></p>
+    <pre class="p-3 whitespace-pre-wrap break-words bg-gray-100 rounded border border-gray-300 overflow-x-auto">
+    <code><%= @note.content %></code>
+    </pre>    
 </div>

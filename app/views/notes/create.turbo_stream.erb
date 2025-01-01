@@ -1,0 +1,7 @@
+<%=turbo_stream.append "notes_list" do%>
+    <%=render "shared/note", note:@note%>
+    
+<%end%>
+
+<%= turbo_stream.update "add_note","" %>
+  

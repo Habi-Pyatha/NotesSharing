@@ -1,5 +1,5 @@
 <%# render "shared/addNotes", note: @note %>
 
-
-<%= render "shared/addNotes", note: @note ,heading: "Edit Note"%>
-
+<%=turbo_frame_tag "note_#{@note.id}" do%>
+    <%= render "shared/addNotes", note: @note ,heading: "Edit Note"%>
+<%end%>
