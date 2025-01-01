@@ -1,16 +1,16 @@
+<%=turbo_frame_tag "content" do%>
 <div class="w-[90%] mx-auto px-4 py-2 border rounded border-blue-300 my-2 shadow-xl">
     <div class="flex justify-between gap-1 mb-2">
-
-                    <%=link_to edit_note_path(@note),class:"text-green-300 hover:text-green-600 " do%>
-                        <i class="fa-regular fa-pen-to-square"></i>
+                <div class="flex ml-auto">
+                    <%=link_to remove_content_notes_path do%>
+                    <span class="bg-red-400 hover:bg-red-600 rounded-full p-1 m-2"><i class="fa-solid fa-xmark"></i></span>
                     <%end%>
-                    <%=link_to note_path(@note) ,data:{turbo_method: :delete,turbo_confirm: "Confirm Deletion of this item?"},class:"text-red-300 hover:text-red-500 " do%>
-                    <i class="fa-regular fa-trash-can"></i>
-                    <%end%>
+                </div>
                     
     </div>
-    <h2 class="text-center text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
+    <h2 class="text-center break-words text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
     <pre class="p-3 whitespace-pre-wrap break-words bg-gray-100 rounded border border-gray-300 overflow-x-auto">
     <code><%= @note.content %></code>
     </pre>    
 </div>
+<%end%>

@@ -57,6 +57,13 @@ class NotesController < ApplicationController
     end
   end
 
+  def remove_content
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.turbo_stream
+    end
+  end
+
   private
   def note_params
     params.require(:note).permit(:title, :content).merge(user_id: current_user.id)

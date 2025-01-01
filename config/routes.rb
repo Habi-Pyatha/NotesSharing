@@ -14,5 +14,10 @@ Rails.application.routes.draw do
   root "notes#index"
   resources :notes, only: [ :index, :create, :edit, :new, :update, :destroy, :show] do
     post :remove_add_form, on: :collection
+    post :remove_content, on: :collection
+    # collection do
+    #   post :remove_add_form
+    #   post :remove_content
+    # end
   end
 end
