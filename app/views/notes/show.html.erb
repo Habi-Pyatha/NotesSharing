@@ -1,14 +1,15 @@
 <%=turbo_frame_tag "content" do%>
 <div class="w-[90%] mx-auto px-4 py-2 border rounded border-blue-300 my-2 shadow-xl">
     <div class="flex justify-between gap-1 mb-2">
+                <%if true%>
                 <div class="flex ml-auto">
                     <%=link_to remove_content_notes_path do%>
                     <span class="bg-red-400 hover:bg-red-600 rounded-full p-1 m-2"><i class="fa-solid fa-xmark"></i></span>
                     <%end%>
                 </div>
-                    
+            <%end%>     
     </div>
-    <h2 class="text-center break-words text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
+    <h2 class="text-center whitespace-pre-wrap break-words text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
     <pre class="p-3 whitespace-pre-wrap break-words bg-gray-100 rounded border border-gray-300 overflow-x-auto">
     <code><%= @note.content %></code>
     </pre>    
