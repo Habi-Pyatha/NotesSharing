@@ -1,4 +1,4 @@
-<div class="border rounded-md shadow-xl p-4  m-4 mb-3">
+<div class="border rounded-md shadow-xl p-4  m-4 mb-3 hover:scale-105 hover:ease-in-out transition duration-300">
                     <div class="flex justify-between gap-1 mb-2">
                         <%if current_user.id == note.user_id%>
                             <%=link_to edit_note_path(note),class:"text-green-300 hover:text-green-600 " do%>
@@ -17,9 +17,9 @@
                         <%end%>
                     </div>
                     <%=link_to note_path(note) ,data:{turbo_frame: "_top"} do%>
-                    <h2 class="bg-gray-400 text-white text-center p-2 rounded hover:bg-blue-400"> <%=note.title.upcase%> </h2> 
+                    <h2 class="bg-gray-400 break-words text-white text-center p-2 rounded hover:bg-blue-400"> <%=note.title.upcase%> </h2> 
                     <%end%>
-                <div class=" text-blue-800 py-3 px-2">
+                <div class=" text-blue-400 hover:text-blue-600 py-3 px-2">
                     Owner: <%=note.user.username.split[0]%>
                 </div>
 </div>
