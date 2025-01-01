@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "notes#index"
-  resources :notes, only: [ :index, :create, :edit, :new, :update, :destroy, :show ]
+  resources :notes, only: [ :index, :create, :edit, :new, :update, :destroy, :show] do
+    post :remove_add_form, on: :collection
+  end
 end

@@ -51,6 +51,12 @@ class NotesController < ApplicationController
     end
   end
 
+  def remove_add_form
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
   def note_params
     params.require(:note).permit(:title, :content).merge(user_id: current_user.id)
