@@ -2,14 +2,21 @@
 <%# <div class=" flex-none w-[80px] max-w-[300px] bg-gray-200 shadow-md py-4 px-2  "> %>
     <div class="md:w-1/6 flex flex-col py-2 px-3  gap-2">
 
+        <%=form_with url:notes_path, method: :get,local:true do%>
+            <div class="flex gap-2">
+                <%=text_field_tag :search, params[:search] , placeholder:"Search notes...", class:"p-2 border rounded w-full", required:true %>
+                <%=submit_tag "Search",class:"p-2 bg-blue-500 text-white rounded"%>
 
-
+            </div>
+        <%end%>
         <%=link_to new_note_path,class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white ",data:{turbo_frame:"add_note"} do%>
             <i class="fa-solid fa-plus"></i> Add Notes
         <%end%>
         
     </div>
     <div class="flex flex-col flex-grow md:w-3/6">
+        <%#  %>
+        <%#  %>
         <%= turbo_frame_tag "add_note"  %>
         <div id="notes_list" class=" w-full grid grid-cols-2 lg:grid-cols-3 ">
                 
@@ -23,6 +30,7 @@
         </div>
     </div >
     <div class="w-full md:w-2/6 ">
+        
        <%=turbo_frame_tag "content"%>
 
     </div>

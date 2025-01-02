@@ -15,6 +15,11 @@ class Note < ApplicationRecord
   has_many_attached :note_images
   validate :validate_note_images
 
+  def self.search_by_title(query)
+    query = Array(query).first.to_s.downcase
+    joins(:user)
+      .where("LOWER(notes.title) LIKE :query OR LOWER(notes.content) LIKE :query OR LOWER(users.username) LIKE :query", query: "%#{query}%")
+  end
 
   private
   def validate_note_images
