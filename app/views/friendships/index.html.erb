@@ -1,0 +1,29 @@
+<h1 class="text-center p-3 font-bold text-2xl">All Users</h1>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-[90%] mx-auto">
+
+<% @users.each do |user|%>
+    <div class="border rounded p-2">
+        <%if true%>
+        <%= image_tag 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg', alt: "Default Profile" %>
+        <% end %>
+        <p class="px-3 py-2 text-center"><%=user.username%> </p>
+        <% # Check if the current user already sent a freind request to this user or vice versa%>
+        <%friendship = current_user.friendships.find_by(friend_id: user.id)%>
+        <%if friendship.nil?%>
+            <%=button_to "Add Friend", send_friend_request_friendship_path(user),method: :post,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600"%>
+        <%elsif friendship.status == 'pending'%>
+            <p class="bg-gray-300 p-2 m-2">Friend request pending......</p>
+            <%=button_to "Cancel Request", friendship_path(friendship),method: :delete,class:"rounded p-2 bg-blue-400 text-white hover:bg-blue-600 m-2"%>
+        <%elsif friendship.status == "accepted"%>
+            <p class="bg-gray-300 p-2 rounded">Friends</p>
+        <%else%>
+            <p class="bg-gray-300 p-2">Friendship rejected</p>
+        <%end%>
+    </div>
+<%end%>
+</div>
+
+
+<div>
+
+</div>

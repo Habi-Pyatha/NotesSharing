@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,12 +13,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "notes#index"
-  resources :notes, only: [ :index, :create, :edit, :new, :update, :destroy, :show] do
+  resources :notes, only: [ :index, :create, :edit, :new, :update, :destroy, :show ] do
     post :remove_add_form, on: :collection
     post :remove_content, on: :collection
     # collection do
     #   post :remove_add_form
     #   post :remove_content
     # end
+  end
+  resources :friendships, only: [ :index, :create, :update, :destroy ] do
+    member do
+      post :send_friend_request
+      post :accept
+      post :reject
+    end
+
+    collection do
+      get :pending_requests
+    end
   end
 end
