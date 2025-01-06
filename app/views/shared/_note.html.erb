@@ -1,6 +1,6 @@
 <div class="border rounded-md shadow-xl p-4  m-4 mb-3 hover:scale-105 hover:ease-in-out transition duration-300">
                     <div class="flex justify-between gap-1 mb-2">
-                        <%if current_user.id == note.user_id%>
+                        <%if user_signed_in? && current_user.id == note.user_id%>
                             <%=link_to edit_note_path(note),class:"text-green-300 hover:text-green-600 " do%>
                                 <i class="fa-regular fa-pen-to-square"></i>
                             <%end%>
