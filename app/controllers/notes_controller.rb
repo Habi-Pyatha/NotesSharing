@@ -2,7 +2,17 @@ class NotesController < ApplicationController
   before_action :set_note, only: [ :edit, :show, :update, :destroy ]
   before_action :authenticate_user!
   def index
-    @notes = Note.all
+    if params[:search].present?
+      @notes=Note.search_by_title(params[:search])
+      flash[:notice]=""
+      unless @notes.any?
+        @notes= Note.all
+        flash[:notice] = "No notes found for \"#{params[:search]}\". Showing all notes."
+
+      end
+    else
+      @notes = Note.all
+    end
     # @notes= @notes.sample(@notes.length)
   end
 
@@ -67,7 +77,7 @@ class NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :content).merge(user_id: current_user.id)
+    params.require(:note).permit(:title, :content, note_images: []).merge(user_id: current_user.id)
   end
 
   def set_note
