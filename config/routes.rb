@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post :send_friend_request
       post :accept
       post :reject
+      delete :remove_friend
     end
 
     collection do
