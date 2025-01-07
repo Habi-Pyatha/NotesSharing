@@ -1,8 +1,9 @@
+<%=turbo_stream_from "notes" %>
 <div class="md:flex overflow-x-hidden">
 <%# <div class=" flex-none w-[80px] max-w-[300px] bg-gray-200 shadow-md py-4 px-2  "> %>
     <div class="md:w-1/6 flex flex-col py-2 px-3  gap-2">
 
-        <%=form_with url:notes_path, method: :get,local:true do%>
+        <%=form_with url:notes_path, method: :get do%>
             <div class="flex gap-2">
                 <%=text_field_tag :search, params[:search] , placeholder:"Search notes...", class:"p-2 border rounded w-full border-blue-300 focus:border-blue-600", required:true %>
                 <%=submit_tag "Search",class:"p-2 bg-blue-500 text-white rounded cursor-pointer"%>
@@ -15,18 +16,33 @@
             <i class="fa-solid fa-plus"></i> Add Notes
         <%end%>
         
+        <%=link_to friendships_path,class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white" do%>
+            <i class="fa-solid fa-people-group"></i> All People
+        <%end%>
+        <%=link_to pending_requests_friendships_path(current_user.id),class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white" do%>
+            <i class="fa-solid fa-users-rays"></i> Friend Requests
+        <%end%>
+        
+        
     </div>
     <div class="flex flex-col flex-grow md:w-3/6">
         <%#  %>
         <%#  %>
+        
         <%= turbo_frame_tag "add_note"  %>
         <div id="notes_list" class=" w-full grid grid-cols-2 lg:grid-cols-3 ">
                 
                 <%@notes.each do |note|%>
-                    <%=turbo_frame_tag "note_#{note.id}" do%>  
-                        <%=render "shared/note", note:note%>
+                    <%if (current_user.friend?(note.user_id) || note.access == "public" || note.user_id == current_user.id) && note.access!="onlyme"%>
+                        <%=turbo_frame_tag "note_#{note.id}" do%>  
+                            <%=render "shared/note", note: note, current: current_user.id%>
+                        <%end%>
+                    
+                    <%elsif (note.access == "onlyme") && (note.user_id == current_user.id)%>
+                        <%=turbo_frame_tag "note_#{note.id}" do%>  
+                            <%=render "shared/note", note: note, current: current_user.id%>
+                        <%end%>
                     <%end%>
-
                 <%end%>
             
         </div>

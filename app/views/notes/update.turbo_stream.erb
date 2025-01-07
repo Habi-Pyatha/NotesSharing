@@ -1,0 +1,3 @@
+<%=turbo_stream.update "note_#{@note.id} do"%>
+    <%= render partial: "shared/note", locals: {note: @note}%>
+<%end%>

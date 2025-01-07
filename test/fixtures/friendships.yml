@@ -1,22 +1,21 @@
 # == Schema Information
 #
-# Table name: notes
+# Table name: friendships
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  content    :text
 #  user_id    :integer          not null
+#  friend_id  :integer          not null
+#  status     :string           default("pending")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  access     :string           default("public")
 #
 
 one:
-  title: MyString
-  content: MyText
-  user: one
+  user_id: 1
+  friend_id: 1
+  status: MyString
 
 two:
-  title: MyString
-  content: MyText
-  user: two
+  user_id: 1
+  friend_id: 1
+  status: MyString

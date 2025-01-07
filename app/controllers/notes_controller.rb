@@ -6,12 +6,12 @@ class NotesController < ApplicationController
       @notes=Note.search_by_title(params[:search])
       flash[:notice]=""
       unless @notes.any?
-        @notes= Note.all
+        @notes= Note.all.order(created_at: :desc)
         flash[:notice] = "No notes found for \"#{params[:search]}\". Showing all notes."
 
       end
     else
-      @notes = Note.all
+      @notes = Note.all.order(created_at: :desc)
     end
     # @notes= @notes.sample(@notes.length)
   end
@@ -36,12 +36,14 @@ class NotesController < ApplicationController
   end
   def show
     # @note=Note.find(params[:id])
-    
   end
   def update
     # @note=Note.find(params[:id])
     if @note.update(note_params)
-      redirect_to root_path, notice: "Note was updated successfully."
+      respond_to do |format|
+        redirect_to root_path, notice: "Note was updated successfully."
+        format.turbo_stream
+      end
     else
       flash[:alert]="Failed to Update Note."
       render :edit, status: :unprocessable_entity
@@ -77,7 +79,7 @@ class NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :content, note_images: []).merge(user_id: current_user.id)
+    params.require(:note).permit(:title, :content, :access, note_images: []).merge(user_id: current_user.id)
   end
 
   def set_note

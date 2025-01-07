@@ -23,7 +23,11 @@
         wrapper_html: { class: "mb-4" }, 
         input_html: { class: "block w-full border rounded p-2" },
         label_html: { class: "block text-gray-700 font-medium mb-1" } %>
-        
+    <%= f.input :access,as: :select, collection:(%w[public friend onlyme]),include_blank: false,
+    wrapper_html: { class: "mb-4" }, 
+        input_html: { class: "block w-full border rounded p-2" },
+        label_html: { class: "block text-gray-700 font-medium mb-1" }
+    %>
     <%= f.submit "Save", 
         class: "w-full border border-blue-600 p-2 rounded hover:bg-blue-500 hover:text-white" %>
   <% end %>
