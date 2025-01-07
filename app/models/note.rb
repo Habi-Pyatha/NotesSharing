@@ -16,15 +16,17 @@ class Note < ApplicationRecord
   has_many_attached :note_images
   validate :validate_note_images
   validates :access, inclusion: { in: %w[public friend onlyme] }
-  after_create_commit -> { broadcast_prepend_to "notes", partial: "shared/note", locals: { note: self }, target: "notes_list" }
-  after_update_commit -> { broadcast_update_to "notes", partial: "shared/note", locals: { note: self } }
+  after_create_commit -> { broadcast_prepend_to "notes", partial: "shared/note", locals: { note: self, current: true }, target: "notes_list" }
+  after_update_commit -> { broadcast_update_to "notes", partial: "shared/note", locals: { note: self, current: true } }
   after_destroy_commit -> { broadcast_remove_to "notes" }
+ 
   def self.search_by_title(query)
     query = Array(query).first.to_s.downcase
     joins(:user)
       .where("LOWER(notes.title) LIKE :query OR LOWER(notes.content) LIKE :query OR LOWER(users.username) LIKE :query", query: "%#{query}%")
   end
 
+ 
   private
   def validate_note_images
     return unless note_images.attached?
