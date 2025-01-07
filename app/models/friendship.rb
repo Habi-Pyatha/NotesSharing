@@ -15,4 +15,5 @@ class Friendship < ApplicationRecord
   validates :status, inclusion: { in: [ "pending", "accepted", "rejected" ] }
 
   scope :accepted, -> { where(status: "accepted") }
+  
 end

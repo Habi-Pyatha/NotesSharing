@@ -1,6 +1,6 @@
 <div class="border rounded-md shadow-xl p-4  m-4 mb-3 hover:scale-105 hover:ease-in-out transition duration-300">
                     <div class="flex justify-between gap-1 mb-2">
-                        <%#if current_user.id == note.user_id%>
+                        <%#if current == note.user_id%>
                         <%if true%>
                             <%=link_to edit_note_path(note),class:"text-green-300 hover:text-green-600 " do%>
                                 <i class="fa-regular fa-pen-to-square"></i>
@@ -22,5 +22,6 @@
                     <%end%>
                 <div class=" text-blue-400 hover:text-blue-600 py-3 px-2">
                     Owner: <%=note.user.username.split[0]%>
+                    Access: <%=note.access%>
                 </div>
 </div>

@@ -28,14 +28,21 @@
     <div class="flex flex-col flex-grow md:w-3/6">
         <%#  %>
         <%#  %>
+        
         <%= turbo_frame_tag "add_note"  %>
         <div id="notes_list" class=" w-full grid grid-cols-2 lg:grid-cols-3 ">
                 
                 <%@notes.each do |note|%>
-                    <%=turbo_frame_tag "note_#{note.id}" do%>  
-                        <%=render "shared/note", note:note%>
+                    <%if (current_user.friend?(note.user_id) || note.access == "public" || note.user_id == current_user.id) && note.access!="onlyme"%>
+                        <%=turbo_frame_tag "note_#{note.id}" do%>  
+                            <%=render "shared/note", note: note, current: current_user.id%>
+                        <%end%>
+                    
+                    <%elsif (note.access == "onlyme") && (note.user_id == current_user.id)%>
+                        <%=turbo_frame_tag "note_#{note.id}" do%>  
+                            <%=render "shared/note", note: note, current: current_user.id%>
+                        <%end%>
                     <%end%>
-
                 <%end%>
             
         </div>

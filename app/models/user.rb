@@ -46,7 +46,10 @@ class User < ApplicationRecord
   def friends
     (friends + inverse_friends).uniq
   end
-
+  def friend?(other_user)
+    friendships.exists?(friend_id: other_user, status: "accepted") ||
+    inverse_friendships.exists?(user_id: other_user, status: "accepted")
+  end
   private
   def validate_user_image
     return unless user_image.attached?

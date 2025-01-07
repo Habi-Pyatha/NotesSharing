@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  helper_method :current_user_safe
 
+  def current_user_safe
+    current_user || User.new
+  end
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :phone, :user_image ])
