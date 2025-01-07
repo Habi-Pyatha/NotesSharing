@@ -40,7 +40,10 @@ class NotesController < ApplicationController
   def update
     # @note=Note.find(params[:id])
     if @note.update(note_params)
-      redirect_to root_path, notice: "Note was updated successfully."
+      respond_to do |format|
+        redirect_to root_path, notice: "Note was updated successfully."
+        format.turbo_stream
+      end
     else
       flash[:alert]="Failed to Update Note."
       render :edit, status: :unprocessable_entity

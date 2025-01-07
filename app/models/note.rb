@@ -16,7 +16,9 @@ class Note < ApplicationRecord
   has_many_attached :note_images
   validate :validate_note_images
   validates :access, inclusion: { in: %w[public friend onlyme] }
-  # after_create_commit -> { broadcast_prepend_to "notes", partial: "shared/note", locals: { note: self }, target: "notes_list" }
+  after_create_commit -> { broadcast_prepend_to "notes", partial: "shared/note", locals: { note: self }, target: "notes_list" }
+  after_update_commit -> { broadcast_replace_to "notes", partial: "shared/note", locals: { note: self } }
+  after_destroy_commit -> { broadcast_remove_to "notes" }
   def self.search_by_title(query)
     query = Array(query).first.to_s.downcase
     joins(:user)
