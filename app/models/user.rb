@@ -50,6 +50,15 @@ class User < ApplicationRecord
     friendships.exists?(friend_id: other_user, status: "accepted") ||
     inverse_friendships.exists?(user_id: other_user, status: "accepted")
   end
+
+  def self.authenticate_with_jwt(token)
+    decoded = JwtService.decode(token)
+    return nil if decoded.nil?
+
+    user_id = decoded[:user_id]
+    User.find_by(id: user_id)
+  end
+  
   private
   def validate_user_image
     return unless user_image.attached?

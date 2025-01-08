@@ -34,17 +34,52 @@
                 
                 <%@notes.each do |note|%>
                     <%if (current_user.friend?(note.user_id) || note.access == "public" || note.user_id == current_user.id) && note.access!="onlyme"%>
-                        <%=turbo_frame_tag "note_#{note.id}" do%>  
-                            <%=render "shared/note", note: note, current: current_user.id%>
-                        <%end%>
+                        
+                            <%current_user.id == note.user_id ? current=true : current=false%>
+
+                            <%=render "shared/note", note: note, current: current%>
+                        
                     
                     <%elsif (note.access == "onlyme") && (note.user_id == current_user.id)%>
-                        <%=turbo_frame_tag "note_#{note.id}" do%>  
+                          
                             <%=render "shared/note", note: note, current: current_user.id%>
-                        <%end%>
+                        
                     <%end%>
                 <%end%>
             
+        </div>
+        <div class="flex justify-center mt-5">
+             <style>
+                .pagy.nav {
+                    display: flex;
+                    justify-content: center;
+                    gap: 8px;
+                    padding: 10px 0;
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                }
+
+                .pagy.nav a {
+                    padding: 8px 12px;
+                    background-color: #f0f0f0;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    color: #333;
+                    text-decoration: none;
+                }
+
+                .pagy.nav a:hover {
+                    background-color: #e0e0e0;
+                }
+
+                .pagy.nav a.current {
+                    background-color: #007bff;
+                    color: white;
+                    border: 1px solid #007bff;
+                    cursor: not-allowed;
+                }
+                </style>
+            <%==pagy_nav(@pagy) if @pagy.pages > 1 %>
         </div>
     </div >
     <div class="w-full md:w-2/6 ">
