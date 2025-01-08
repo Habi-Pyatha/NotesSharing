@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   def current_user_safe
     current_user || User.new
   end
+  
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :phone, :user_image ])
