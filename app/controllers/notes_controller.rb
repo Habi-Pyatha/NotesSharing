@@ -13,6 +13,7 @@ class NotesController < ApplicationController
     else
       @notes = Note.all.order(created_at: :desc)
     end
+    @pagy,@notes =pagy(@notes,items:6)
     # @notes= @notes.sample(@notes.length)
   end
 
