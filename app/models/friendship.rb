@@ -15,5 +15,7 @@ class Friendship < ApplicationRecord
   validates :status, inclusion: { in: [ "pending", "accepted", "rejected" ] }
 
   scope :accepted, -> { where(status: "accepted") }
-  
+  after_create_commit -> { broadcast_prepend_to "pending_request", partial: "pendingRequest", locals: { friendship: self }, target: "pending" }
+  after_update_commit -> { broadcast_remove_to "pending_request", partial: "pendingRequest", locals: { friendship: self } }
+  after_destroy_commit -> { broadcast_remove_to "pending_request" }
 end

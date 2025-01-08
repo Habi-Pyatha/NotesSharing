@@ -7,7 +7,10 @@ class FriendshipsController < ApplicationController
   def create
     friend = User.find(params[:friend_id])
     current_user.send_friend_request(friend)
-    redirect_to friendships_path(friend), notice: "Friend request sent!"
+    respond_to do |format|
+     format.html { redirect_to friendships_path(friend), notice: "Friend request sent!" }
+    end
+    format.turbo_stream
   end
 
   def update

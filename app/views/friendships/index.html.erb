@@ -1,31 +1,9 @@
+<%=turbo_stream_from "friendship"%>
 <h1 class="text-center p-3 font-bold text-2xl">All Users</h1>
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-[90%] mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-[90%] mx-auto" , id="all_users">
 
 <% @users.each do |user|%>
-    <div class="border rounded p-2">
-        <div class="relative mx-4 mt-4 overflow-hidden rounded-xl h-36 lg:h-72 bg-blue-700">
-        <%if user.user_image.attached?%>
-            <%= image_tag user.user_image, alt: "#{user.username} Profile" ,class:"object-cover w-full h-full" %>
-        <%else%>
-        <%= image_tag 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg', alt: "Default Profile",class:"object-cover w-full h-full" %>
-        <% end %>
-        </div>
-        <p class="px-3 py-2 text-center"><%=user.username%> </p>
-        <% # Check if the current user already sent a freind request to this user or vice versa%>
-        <%friendship = current_user.friendships.find_by(friend_id: user.id)%>
-        <%if current_user.friend?(user.id)%>
-            <p class="bg-gray-300 p-2 rounded">Friends</p>
-            <%=button_to "Remove Friend", remove_friend_friendship_path(user),method: :delete,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600"%>
-        <%elsif friendship.nil?%>
-            <%=button_to "Add Friend", send_friend_request_friendship_path(user),method: :post,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600"%>
-        <%elsif friendship.status == 'pending'%>
-            <p class="bg-gray-300 p-2 m-2">Friend request pending......</p>
-            <%=button_to "Cancel Request", friendship_path(friendship),method: :delete,class:"rounded p-2 bg-blue-400 text-white hover:bg-blue-600 m-2"%>
-        
-        <%else%>
-            <p class="bg-gray-300 p-2">Friendship rejected</p>
-        <%end%>
-    </div>
+    <%=render "user" , user: user%>
 <%end%>
 </div>
 
