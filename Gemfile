@@ -65,3 +65,5 @@ gem "simple_form"
 gem "jwt"
 gem "redis", "~> 4.0"
 gem "pagy"
+
+gem "active_model_serializers"
