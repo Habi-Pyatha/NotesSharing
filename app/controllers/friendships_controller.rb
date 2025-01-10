@@ -3,11 +3,15 @@ class FriendshipsController < ApplicationController
 
   def index
     @users = User.where.not(id: current_user.id)
+    @friendship = Friendship.last
   end
   def create
     friend = User.find(params[:friend_id])
     current_user.send_friend_request(friend)
-    redirect_to friendships_path(friend), notice: "Friend request sent!"
+    respond_to do |format|
+      format.html { redirect_to friendships_path(friend), notice: "Friend request sent!" }
+      # format.turbo_stream
+    end
   end
 
   def update
@@ -53,6 +57,9 @@ class FriendshipsController < ApplicationController
 
   def pending_requests
     @pending_requests = current_user.inverse_friendships.where(status: "pending")
+    @friendship = Friendship.last
+
+    render locals: { friendship: @friendship,  }
   end
 
   def accept

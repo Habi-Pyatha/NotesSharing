@@ -1,0 +1,17 @@
+
+    <div class="border rounded p-2 mb-2 flex space-between m-2 items-center shadow-md">
+        <%# image_tag friendship.user.user_image.variant(resize_to_limit: [50, 50]).processed, alt: "Profile" if friendship.user.user_image.attached? %>
+        <div class="h-10 w-10 md:h-16 md:w-16 m-2 rounded-full overflow-hidden border">
+        <%if friendship.user.user_image.attached?%>
+            <%= image_tag friendship.user.user_image, alt: "#{friendship.user.username} Profile" ,class:"object-cover w-full h-full" %>
+        <%else%>
+        <%= image_tag 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg', alt: "Default Profile",class:"object-cover w-full h-full" %>
+        <% end %>
+    </div>
+        <p class="text-lg md:text-xl lg:text-2xl font-semibold p-3"><%= friendship.user.username %></p>
+        <div class="flex ml-auto">
+
+            <%= button_to 'Accept', accept_friendship_path(friendship), method: :post, class: " ml-auto border bg-blue-300 border-blue-400 p-3 rounded hover:bg-green-500 hover:text-white",data:{turbo_frame:"user_4}"} %>
+            <%= button_to 'Reject', reject_friendship_path(friendship), method: :post, class: "border bg-blue-300 border-blue-400 mx-2 p-3 rounded hover:bg-red-500 hover:text-white ",data:{turbo_frame:"user_4"} %>
+        </div>
+    </div>

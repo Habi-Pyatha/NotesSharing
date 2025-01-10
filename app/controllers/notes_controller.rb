@@ -24,8 +24,8 @@ class NotesController < ApplicationController
     @note= Note.new(note_params)
     if @note.save
       respond_to do |format|
-        format.html { redirect_to root_path, notice: "Note was added successfully." }
-        format.turbo_stream
+        format.html { redirect_to root_path, notice: "Note was added successfully."}
+        format.turbo_stream 
       end
     else
       flash[:alert]="Failed to Add Note."

@@ -5,22 +5,22 @@
 
         <%=form_with url:notes_path, method: :get do%>
             <div class="flex gap-2">
-                <%=text_field_tag :search, params[:search] , placeholder:"Search notes...", class:"p-2 border rounded w-full border-blue-300 focus:border-blue-600", required:true %>
-                <%=submit_tag "Search",class:"p-2 bg-blue-500 text-white rounded cursor-pointer"%>
+                <%=text_field_tag :search, params[:search] , placeholder:"Search notes...", class:"p-2 border rounded w-full border-blue-300 focus:border-blue-600 dark:text-black", required:true %>
+                <%=submit_tag "Search",class:"p-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"%>
                 
                 
 
             </div>
         <%end%>
         <%=link_to new_note_path,class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white ",data:{turbo_frame:"add_note"} do%>
-            <i class="fa-solid fa-plus"></i> Add Notes
+            <i class="fa-solid fa-plus"></i> <span class="ml-2">Add Notes</span>
         <%end%>
         
         <%=link_to friendships_path,class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white" do%>
-            <i class="fa-solid fa-people-group"></i> All People
+            <i class="fa-solid fa-people-group"></i> <span class="ml-2">All People</span>
         <%end%>
         <%=link_to pending_requests_friendships_path(current_user.id),class:"px-4 py-2 mt-4  border border-blue-500 rounded hover:bg-blue-500 hover:text-white" do%>
-            <i class="fa-solid fa-users-rays"></i> Friend Requests
+            <i class="fa-solid fa-users-rays"></i> <span class="ml-2">Friend Requests</span>
         <%end%>
         
         
@@ -35,14 +35,14 @@
                 <%@notes.each do |note|%>
                     <%if (current_user.friend?(note.user_id) || note.access == "public" || note.user_id == current_user.id) && note.access!="onlyme"%>
                         
-                            <%current_user.id == note.user_id ? current=true : current=false%>
+                            <%#current_user.id == note.user_id ? current=true : current=false%>
 
-                            <%=render "shared/note", note: note, current: current%>
+                            <%=render "shared/note", note: note%>
                         
                     
                     <%elsif (note.access == "onlyme") && (note.user_id == current_user.id)%>
                           
-                            <%=render "shared/note", note: note, current: current_user.id%>
+                            <%=render "shared/note", note: note%>
                         
                     <%end%>
                 <%end%>
