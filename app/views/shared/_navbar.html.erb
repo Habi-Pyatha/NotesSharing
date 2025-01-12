@@ -1,9 +1,25 @@
 <nav class="relative select-none bg-grey lg:flex lg:items-center w-full bg-gray-700">
   <div class="flex flex-no-shrink items-stretch h-12">
-    <%= link_to "ColabNotes",root_path,class:"flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-lg text-white no-underline flex items-center hover:text-green-600"%>
+    <%= link_to "ColabNotes",root_path,class:"flex-no-grow flex-no-shrink relative ml-3 py-2 px-4 leading-normal text-xl text-white no-underline flex items-center hover:text-green-600"%>
     
   </div>
   <div class="lg:flex lg:items-stretch lg:flex-no-shrink lg:flex-grow">
+    <%#  %>
+  <div class=" ml-auto justify-center flex flex-row items-center transition-all ease-in-out">
+    <div class="flex flex-row justify-between toggle">
+        <label for="dark-toggle" class="flex items-center cursor-pointer">
+            <div class="relative">
+            <input type="checkbox" name="dark-mode" id="dark-toggle" class="checkbox hidden">
+            <div class="block border-[1px] dark:border-white border-white w-14 h-8 rounded-full"></div>
+            <div class="dot absolute left-1 top-1 dark:bg-white bg-white w-6 h-6 rounded-full transition"></div>
+            </div>
+            <div class="ml-3 dark:text-white text-white font-medium">
+            Dark Mode
+            </div>
+        </label>
+        </div>
+    </div>
+    <%#  %>
     <div class="lg:flex lg:items-stretch lg:justify-end ml-auto">
     <%unless user_signed_in?%>
         <%= link_to "Sign In", new_user_session_path, class: "flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-green-500" %>
@@ -27,3 +43,41 @@
     </div>
   </div>
 </nav>
+
+
+<!-- component -->
+<!-- This is an example component -->
+    <style>
+
+        input:checked ~ .dot {
+        transform: translateX(100%);
+        /* background-color: #132b50; */
+        }
+    </style>
+
+<script>
+    function darkModeListener() {
+        // Add this to check
+
+    document.querySelector("html").classList.toggle("dark");
+    document.querySelector("body").classList.toggle("dark");
+    // console.log("habi")
+    
+    }
+  //   function toggleDark() {
+  //   if (document.documentElement.classList.contains('dark')) {
+  //     document.documentElement.classList.remove('dark');
+  //     console.log("clicked")
+      
+  //     //localStorage.setItem("theme", "light");
+  //   } else {
+  //     document.documentElement.classList.add('dark');
+  //     //localStorage.setItem("theme", "dark");
+  //     console.log("cli")
+  //   }
+  // }
+
+    document.querySelector("input[type='checkbox']#dark-toggle").addEventListener("click", darkModeListener);
+
+
+</script>

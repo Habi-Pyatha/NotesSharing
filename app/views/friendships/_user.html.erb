@@ -1,0 +1,37 @@
+<%=turbo_frame_tag "user_#{user.id}" do%>
+<div class="border rounded-lg p-2 bg-gradient-to-r from-teal-400 to-yellow-200 shadow-slate-500">
+        <div class="relative mx-4 mt-4 overflow-hidden rounded-xl h-36 lg:h-72 bg-blue-700">
+        <%if user.user_image.attached?%>
+            <%= image_tag user.user_image, alt: "#{user.username} Profile" ,class:"object-cover w-full h-full" %>
+        <%else%>
+        <%= image_tag 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg', alt: "Default Profile",class:"object-cover w-full h-full" %>
+        <% end %>
+        </div>
+        <p class="px-3 py-2 text-center font-bold text-xl lg:text-2xl"><%=user.username%> </p>
+        <% # Check if the current user already sent a freind request to this user or vice versa%>
+        <div class="w-[90%] mx-auto">
+        <%friendship = current_user.friendships.find_by(friend_id: user.id)%>
+        <%if current_user.friend?(user.id)%>
+            <p class="bg-green-300 p-2 border border-white rounded pl-4">Friends</p>
+            <%=button_to  remove_friend_friendship_path(user),method: :delete,class:"rounded p-2 m-2 mx-auto w-full bg-blue-400 text-white hover:bg-blue-600 border border-white" do%>
+            <i class="fas fa-user-minus"></i> <span class="ml-1"> Remove Friend</span>
+            <%end%>
+        <%elsif friendship.nil?%>
+            <%=button_to  send_friend_request_friendship_path(user),method: :post,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600 border border-white mx-auto w-full" do%>
+            <i class="fas fa-user-plus"></i> <span class="ml-1"> Add Friend</span>
+            <%end%>
+
+        <%elsif friendship.status == 'pending'%>
+            <p class="bg-blue-300 p-2 border border-white rounded">Friend request pending......</p>
+            <%=button_to  friendship_path(friendship),method: :delete,class:"rounded p-2 bg-blue-400 text-white hover:bg-blue-600 m-2 border border-white w-full mx-auto" do%>
+                <i class="fas fa-user-times"></i>
+                <span class="ml-1">Cancel Request</span>
+            <%end%>
+        
+        <%else%>
+            <p class="bg-red-300 p-2">Friendship rejected</p>
+        <%end%>
+        </div>
+    </div>
+
+    <%end%>

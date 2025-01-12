@@ -1,8 +1,8 @@
-<div class="p-4 border rounded md:w-[90%] mx-auto mt-4 flex flex-col bg-gray-200">
+<div class="p-4 border rounded md:w-[90%] mx-auto mt-4 flex flex-col bg-gray-200 dark:bg-gray-900 dark:text-white">
   
 
       <%=link_to remove_add_form_notes_path ,class:"ml-auto" do%>
-    <span class=" hover:bg-red-400 p-2 bg-red-200 rounded-full">
+    <span class=" hover:text-red-600 text-red-300 p-2 rounded-full">
         <i class="fa-solid fa-xmark"></i>
     </span>
       <%end%>
@@ -11,22 +11,22 @@
   <%= simple_form_for note do |f| %>
     <%= f.input :title, 
         autofocus: true,
-        label_html: { class: "block text-gray-700 font-medium mb-1" },
-        input_html: { class: "block w-full border rounded mb-4 p-2" } %>
+        label_html: { class: "block text-gray-700 font-medium mb-1 dark:text-white" },
+        input_html: { class: "block w-full border rounded mb-4 p-2 dark:text-black" } %>
     <%= f.input :note_images,label:"Note Images",
         as: :file,
-        label_html: { class: "block text-gray-700 font-medium mb-1" },
-        input_html: { class: "block w-full border rounded mb-4 p-2",multiple:true,accept:"image/*" } %>
+        label_html: { class: "block text-gray-700 font-medium mb-1 dark:text-white" },
+        input_html: { class: "block w-full border rounded mb-4 p-2 ",multiple:true,accept:"image/*" } %>
         
     <%= f.input :content, 
         as: :text, 
         wrapper_html: { class: "mb-4" }, 
-        input_html: { class: "block w-full border rounded p-2" },
-        label_html: { class: "block text-gray-700 font-medium mb-1" } %>
+        input_html: { class: "block w-full border rounded p-2 dark:text-black" },
+        label_html: { class: "block text-gray-700 font-medium mb-1 dark:text-white" } %>
     <%= f.input :access,as: :select, collection:(%w[public friend onlyme]),include_blank: false,
     wrapper_html: { class: "mb-4" }, 
-        input_html: { class: "block w-full border rounded p-2" },
-        label_html: { class: "block text-gray-700 font-medium mb-1" }
+        input_html: { class: "block w-full border rounded p-2 dark:text-black" },
+        label_html: { class: "block text-gray-700 font-medium mb-1 dark:text-white" }
     %>
     <%= f.submit "Save", 
         class: "w-full border border-blue-600 p-2 rounded hover:bg-blue-500 hover:text-white" %>

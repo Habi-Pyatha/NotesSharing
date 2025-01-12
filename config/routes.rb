@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"
+      post "users/sign_up", to: "registrations#create"
       resources :notes, only: [ :index, :show ]
     end
   end

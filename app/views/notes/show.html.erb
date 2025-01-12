@@ -9,8 +9,8 @@
                 </div>
             <%end%>     
     </div>
-    <h2 class="text-center whitespace-pre-wrap break-words text-blue-400 text-2xl p-3 "> <%=@note.title%></h2>
-    <pre class="p-3 min-h-[50vh] whitespace-pre-wrap break-words bg-gray-100 rounded border border-gray-300 overflow-x-auto">
+    <h2 class="text-center whitespace-pre-wrap break-words text-blue-400 text-2xl p-3 "> <%=@note.title.upcase%></h2>
+    <pre class="p-3 min-h-[50vh] whitespace-pre-wrap break-words bg-gray-100 rounded border border-gray-300 overflow-x-auto dark:bg-gray-700 dark:text-white">
     <code class=""><%= @note.content %></code>
     </pre>
     <%# <div class="grid grid-cols-3 gap-4 mt-3"> %>

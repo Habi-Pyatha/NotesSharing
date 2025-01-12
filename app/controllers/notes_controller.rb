@@ -13,7 +13,7 @@ class NotesController < ApplicationController
     else
       @notes = Note.all.order(created_at: :desc)
     end
-    @pagy,@notes =pagy(@notes,items:6)
+    #  @pagy, @notes =pagy(@notes)
     # @notes= @notes.sample(@notes.length)
   end
 
@@ -24,8 +24,8 @@ class NotesController < ApplicationController
     @note= Note.new(note_params)
     if @note.save
       respond_to do |format|
-        format.html { redirect_to root_path, notice: "Note was added successfully." }
-        format.turbo_stream
+        format.html { redirect_to root_path, notice: "Note was added successfully."}
+        format.turbo_stream 
       end
     else
       flash[:alert]="Failed to Add Note."

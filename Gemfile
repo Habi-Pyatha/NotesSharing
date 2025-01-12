@@ -67,3 +67,4 @@ gem "redis", "~> 4.0"
 gem "pagy"
 
 gem "active_model_serializers"
+gem "rack-cors"
