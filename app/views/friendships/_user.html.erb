@@ -17,7 +17,7 @@
             <i class="fas fa-user-minus"></i> <span class="ml-1"> Remove Friend</span>
             <%end%>
         <%elsif friendship.nil?%>
-            <%=button_to  send_friend_request_friendship_path(user),method: :post,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600 border border-white mx-auto w-full",data: { turbo_action: "replace", turbo_frame: "pending_request" } do%>
+            <%=button_to  send_friend_request_friendship_path(user),method: :post,class:"rounded p-2 m-2 bg-blue-400 text-white hover:bg-blue-600 border border-white mx-auto w-full" do%>
             <i class="fas fa-user-plus"></i> <span class="ml-1"> Add Friend</span>
             <%end%>
 

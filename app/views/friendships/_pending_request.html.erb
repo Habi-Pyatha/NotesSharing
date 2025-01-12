@@ -1,4 +1,4 @@
-
+<%=turbo_frame_tag "request_#{friendship.user_id}" do%>
     <div class="border rounded p-2 mb-2 flex space-between m-2 items-center shadow-md">
         <%# image_tag friendship.user.user_image.variant(resize_to_limit: [50, 50]).processed, alt: "Profile" if friendship.user.user_image.attached? %>
         <div class="h-10 w-10 md:h-16 md:w-16 m-2 rounded-full overflow-hidden border">
@@ -15,3 +15,5 @@
             <%= button_to 'Reject', reject_friendship_path(friendship), method: :post, class: "border bg-blue-300 border-blue-400 mx-2 p-3 rounded hover:bg-red-500 hover:text-white ",data:{turbo_frame:"user_4"} %>
         </div>
     </div>
+
+    <%end%>
