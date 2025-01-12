@@ -63,7 +63,7 @@ gem "tailwindcss-rails", "~> 3.1"
 gem "image_processing"
 gem "simple_form"
 gem "jwt"
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.3"
 gem "pagy"
 
 gem "active_model_serializers"
