@@ -1,4 +1,4 @@
-<%=turbo_stream_from "requests"%>
+<%=turbo_stream_from "requests_#{current_user.id}"%>
 <%if @pending_requests.empty?%>
     <h2 class="text-center font-semibold text-2xl text-center">No Friend requests.</h2>
 <%else%>
@@ -7,9 +7,10 @@
     <%#turbo_frame_tag "pending_request" do%>
     <div id="pending_request">
         <%# if friendship%>
-        <%#@pending_requests.each do |friendship| %>
-        <%#=render "friendships/pending_request",friendship:friendship%>
-        <%# end %>
+            <%@pending_requests.each do |friendship| %>
+            <%=render "friendships/pending_request",friendship:friendship%>
+        <% end %>
+        <%#end %>
     </div>
     <%#end%>
 <%end%>

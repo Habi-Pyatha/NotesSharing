@@ -57,9 +57,11 @@ class FriendshipsController < ApplicationController
 
   def pending_requests
     @pending_requests = current_user.inverse_friendships.where(status: "pending")
-    @friendship = Friendship.last
 
-    render locals: { friendship: @friendship,  }
+    puts "test #{@pending_requests}"
+    # @friendship = Friendship.last
+
+    # render locals: { friendship: @friendship,  }
   end
 
   def accept

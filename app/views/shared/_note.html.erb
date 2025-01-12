@@ -1,9 +1,9 @@
 <%=turbo_frame_tag "note_#{note.id}" do%>
 <div class="border rounded-md shadow-xl p-4  m-4 mb-3 hover:scale-105 hover:ease-in-out transition duration-300 ">
                     <div class="flex justify-between gap-1 mb-2">
-                        <%#if current_user.id == note.user_id%>
+                        <%if current_user.id == note.user_id%>
                         <%#if current%>
-                        <%= current_user.inspect%>
+                        <%# current_user.inspect%>
                         <%#"#{current_user.id} , #{note.user_id}%>
                             <%=link_to edit_note_path(note),class:"text-green-300 hover:text-green-600 " do%>
                                 <i class="fa-regular fa-pen-to-square"></i>
@@ -14,11 +14,11 @@
                             <%=link_to note_path(note) ,data:{turbo_method: :delete,turbo_confirm: "Confirm Deletion of this item?"},class:"text-red-300 hover:text-red-500 " do%>
                             <i class="fa-regular fa-trash-can"></i>
                             <%end%>
-                        <%#else%>
+                        <%else%>
                             <%=link_to note_path(note),data:{turbo_frame: "content"},class:"text-blue-300 hover:text-blue-600 hidden md:block m-auto" do%>
                                 <i class="fa-solid fa-book-open"></i>
                             <%end%>
-                        <%#end%>
+                        <%end%>
                     </div>
                     <%=link_to note_path(note) ,data:{turbo_frame: "_top"} do%>
                     <h2 class="bg-gray-400 break-words text-white text-center p-2 rounded hover:bg-blue-400"> <%=note.title.upcase%> </h2> 
