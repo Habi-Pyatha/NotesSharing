@@ -59,7 +59,7 @@ end
 
 gem "devise"
 
-gem "tailwindcss-rails", "~> 3.1"
+gem "tailwindcss-rails", "~> 3.3"
 gem "image_processing"
 gem "simple_form"
 gem "jwt"
